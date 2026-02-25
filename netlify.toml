@@ -1,0 +1,29 @@
+# ─────────────────────────────────────────────────────────────
+# Netlify Configuration — Dynamic Next.js Deployment
+# Uses @netlify/plugin-nextjs to support API routes, SSR,
+# and serverless/edge functions out of the box.
+# ─────────────────────────────────────────────────────────────
+
+[build]
+  command   = "npm run build"
+  publish   = ".next"
+
+[build.environment]
+  NODE_VERSION = "20"
+
+# ─── Headers ────────────────────────────────────────────────
+# Security & caching headers applied to all routes.
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options          = "DENY"
+    X-Content-Type-Options   = "nosniff"
+    Referrer-Policy          = "strict-origin-when-cross-origin"
+    Permissions-Policy       = "camera=(), microphone=(), geolocation=()"
+
+# Cache static assets aggressively
+[[headers]]
+  for = "/_next/static/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
