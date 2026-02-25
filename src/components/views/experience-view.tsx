@@ -14,40 +14,43 @@ import {
 export function ExperienceView() {
     return (
         <>
-            <DateSeparator>2023 - Present</DateSeparator>
+            <DateSeparator>April 2023 – April 2024</DateSeparator>
 
             <MessageBubble>
-                <MessageLabel>Current Role</MessageLabel>
-                <MessageHeading>Senior Software Engineer</MessageHeading>
-                <MessageSubheading>TechNova Solutions</MessageSubheading>
+                <MessageLabel>Professional Experience</MessageLabel>
+                <MessageHeading>Frontend Trainee</MessageHeading>
+                <MessageSubheading>Spanco Web Technologies · Kota, Rajasthan</MessageSubheading>
                 <MessageList>
                     <MessageListItem>
-                        Architected and developed a high-traffic SaaS platform using Next.js and Microservices.
+                        Conducted in-depth research and analysis of existing web applications to understand UI/UX patterns, features, and design structures.
                     </MessageListItem>
                     <MessageListItem>
-                        Led a team of 5 developers, improving code quality and deployment efficiency by 40%.
+                        Designed and developed Shopify applications using Polaris components, ensuring consistency with Shopify&apos;s design system.
                     </MessageListItem>
                     <MessageListItem>
-                        Implemented advanced animation systems using Framer Motion and integrated real-time features.
+                        Evaluated and customized Shopify themes, including layouts, settings, and visual styling for improved user experience.
+                    </MessageListItem>
+                    <MessageListItem>
+                        Collaborated on translating design references into functional, responsive UI components.
+                    </MessageListItem>
+                    <MessageListItem>
+                        Enhanced frontend performance via theme inspection, optimization, and organized project bundling.
                     </MessageListItem>
                 </MessageList>
             </MessageBubble>
 
-            <DateSeparator>2020 - 2022</DateSeparator>
+            <DateSeparator>June 2022 – August 2022</DateSeparator>
 
             <MessageBubble>
-                <MessageLabel>Previous Role</MessageLabel>
-                <MessageHeading>Full-Stack Developer</MessageHeading>
-                <MessageSubheading>Creative Dynamics</MessageSubheading>
+                <MessageLabel>Internship</MessageLabel>
+                <MessageHeading>Software Intern</MessageHeading>
+                <MessageSubheading>Lata Softwares · Kota, Rajasthan</MessageSubheading>
                 <MessageList>
                     <MessageListItem>
-                        Built and maintained custom CMS solutions for enterprise clients.
+                        Completed intensive training in C# programming fundamentals.
                     </MessageListItem>
                     <MessageListItem>
-                        Optimized database queries, reducing response times by 50% across the board.
-                    </MessageListItem>
-                    <MessageListItem>
-                        Collaborated closely with designers to ensure pixel-perfect implementation of UI components.
+                        Gained foundational understanding of software development workflows and best practices.
                     </MessageListItem>
                 </MessageList>
             </MessageBubble>

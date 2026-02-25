@@ -10,9 +10,9 @@ import { Button } from "@/components/ui/button";
 import codingAnimationData from "@/components/lottie/coding-animation.json";
 
 const SKILLS = [
-    "React", "Next.js", "TypeScript", "Tailwind CSS",
-    "Node.js", "Prisma", "PostgreSQL", "Docker",
-    "System Design", "UI/UX Design", "Framer Motion"
+    "React.js", "Next.js", "JavaScript", "TypeScript", "Tailwind CSS",
+    "Node.js", "Shopify Polaris", "Material UI", "Framer Motion",
+    "Responsive Design", "Git & GitHub", "Generative AI",
 ];
 
 export function ProfileView() {
@@ -32,13 +32,14 @@ export function ProfileView() {
                     </div>
                     <div className="flex-1 min-w-0">
                         <p className="text-[15px] leading-relaxed text-foreground/90">
-                            I&apos;m a passionate Full-Stack Developer with a keen eye for UI/UX.
-                            I specialize in building modular, performant, and visually stunning
-                            web applications using modern technologies like Next.js and TypeScript.
+                            I&apos;m a passionate Frontend Developer with 1+ year of experience building
+                            responsive and high-performance web applications using JavaScript and
+                            React.js. Proficient in leveraging AI-assisted development tools like
+                            Cursor and advanced prompt engineering to accelerate development.
                         </p>
                         <p className="text-[15px] leading-relaxed text-foreground/90 mt-2">
-                            Currently focused on creating seamless user experiences and
-                            exploring the intersection of AI and frontend development.
+                            Currently pursuing my MCA and focused on creating fast,
+                            user-centric, and efficient digital experiences.
                         </p>
                     </div>
                     <div className="shrink-0 mt-1 hidden sm:block">
@@ -79,4 +80,3 @@ export function ProfileView() {
         </>
     );
 }
-

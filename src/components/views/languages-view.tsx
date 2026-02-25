@@ -16,10 +16,9 @@ interface Language {
 }
 
 const LANGUAGES: Language[] = [
-    { name: "English", proficiency: "Native / Bilingual", flag: "🇺🇸", level: 5 },
-    { name: "Spanish", proficiency: "Professional Working", flag: "🇪🇸", level: 3 },
-    { name: "French", proficiency: "Elementary", flag: "🇫🇷", level: 2 },
+    { name: "English", proficiency: "Professional Working", flag: "🇬🇧", level: 4 },
     { name: "Hindi", proficiency: "Native / Bilingual", flag: "🇮🇳", level: 5 },
+    { name: "Malayalam", proficiency: "Native / Bilingual", flag: "🇮🇳", level: 5 },
 ];
 
 function ProficiencyDots({ level, max = 5 }: { level: number; max?: number }) {
@@ -29,8 +28,8 @@ function ProficiencyDots({ level, max = 5 }: { level: number; max?: number }) {
                 <div
                     key={i}
                     className={`w-2 h-2 rounded-full transition-colors ${i < level
-                            ? "bg-primary"
-                            : "bg-muted-foreground/20 dark:bg-white/10"
+                        ? "bg-primary"
+                        : "bg-muted-foreground/20 dark:bg-white/10"
                         }`}
                 />
             ))}
@@ -72,13 +71,13 @@ export function LanguagesView() {
                 <MessageLabel>Programming Languages</MessageLabel>
                 <div className="flex flex-wrap gap-2 mt-2">
                     {[
-                        "TypeScript",
                         "JavaScript",
-                        "Python",
+                        "HTML",
+                        "CSS",
+                        "TypeScript",
+                        "C#",
                         "SQL",
-                        "HTML/CSS",
-                        "Bash",
-                        "Rust (learning)",
+                        "Liquid (Shopify)",
                     ].map((lang) => (
                         <span
                             key={lang}

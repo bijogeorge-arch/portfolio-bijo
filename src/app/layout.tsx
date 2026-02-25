@@ -23,20 +23,21 @@ const SITE_URL =
 
 export const metadata: Metadata = {
   title: {
-    default: "Bijo George | Full-Stack Developer Portfolio",
+    default: "Bijo George | Frontend Developer Portfolio",
     template: "%s | Bijo George",
   },
   description:
-    "Telegram-inspired developer portfolio of Bijo George — Full-Stack Developer & UI Engineer. Explore projects, skills, experience, and chat with an AI assistant.",
+    "Telegram-inspired developer portfolio of Bijo George — Frontend Developer & React Specialist. Explore projects, skills, experience, and chat with an AI assistant.",
   keywords: [
     "Bijo George",
-    "Full-Stack Developer",
-    "UI Engineer",
+    "Frontend Developer",
+    "React Developer",
     "Portfolio",
     "Next.js",
     "React",
-    "TypeScript",
+    "JavaScript",
     "Tailwind CSS",
+    "Shopify Developer",
     "Developer Portfolio",
   ],
   authors: [{ name: "Bijo George" }],
@@ -49,7 +50,7 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: SITE_URL,
     siteName: "Bijo George — Developer Portfolio",
-    title: "Bijo George | Full-Stack Developer Portfolio",
+    title: "Bijo George | Frontend Developer Portfolio",
     description:
       "Telegram-inspired developer portfolio — projects, skills, and an AI assistant. Built with Next.js, Tailwind CSS, and Framer Motion.",
     images: [
@@ -57,7 +58,7 @@ export const metadata: Metadata = {
         url: "/images/og-preview.jpg",
         width: 1200,
         height: 630,
-        alt: "Bijo George — Full-Stack Developer Portfolio Preview",
+        alt: "Bijo George — Frontend Developer Portfolio Preview",
       },
     ],
   },
@@ -65,7 +66,7 @@ export const metadata: Metadata = {
   // ── Twitter Card ───────────────────────────────────────────
   twitter: {
     card: "summary_large_image",
-    title: "Bijo George | Full-Stack Developer Portfolio",
+    title: "Bijo George | Frontend Developer Portfolio",
     description:
       "Explore a Telegram-inspired developer portfolio with AI assistant integration.",
     images: ["/images/og-preview.jpg"],

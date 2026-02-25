@@ -40,12 +40,12 @@ const VIEW_MAP: Record<string, React.ComponentType> = {
 
 /* ── Pinned message per tab ────────────────────────────────── */
 const PINNED_MESSAGES: Record<string, string> = {
-    profile: "Welcome! Check out my latest projects or download my resume.",
-    experience: "5+ years of professional experience in full-stack development.",
+    profile: "Welcome! Check out my projects or download my resume.",
+    experience: "1+ year of frontend development experience with React & Shopify.",
     projects: "Explore my featured projects — click any card for details.",
     skills: "A snapshot of my technical stack and proficiency levels.",
-    education: "Academic background and continuous learning journey.",
-    languages: "Languages I speak and work in, professionally.",
+    education: "MCA (pursuing) · BCA · Emmanuel Mission School",
+    languages: "English, Hindi, Malayalam + programming languages.",
     contact: "Feel free to reach out — I'm always open to new opportunities!",
     settings: "Customize your viewing experience.",
 };

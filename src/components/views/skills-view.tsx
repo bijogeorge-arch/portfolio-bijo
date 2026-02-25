@@ -15,37 +15,31 @@ interface Skill {
 }
 
 const FRONTEND_SKILLS: Skill[] = [
-    { name: "React / Next.js", level: 95 },
-    { name: "TypeScript", level: 92 },
-    { name: "Tailwind CSS", level: 90 },
-    { name: "Framer Motion", level: 85 },
-    { name: "HTML / CSS", level: 95 },
-    { name: "Redux / Zustand", level: 80 },
-];
-
-const BACKEND_SKILLS: Skill[] = [
-    { name: "Node.js / Express", level: 88 },
-    { name: "PostgreSQL", level: 85 },
-    { name: "Prisma / Drizzle", level: 82 },
-    { name: "REST & GraphQL APIs", level: 87 },
-    { name: "Redis", level: 75 },
-    { name: "Python / FastAPI", level: 72 },
-];
-
-const DEVOPS_SKILLS: Skill[] = [
-    { name: "Docker", level: 80 },
-    { name: "CI/CD (GitHub Actions)", level: 82 },
-    { name: "Vercel / AWS", level: 78 },
-    { name: "Git / Git Flow", level: 92 },
-    { name: "Linux / Shell", level: 75 },
-    { name: "Monitoring & Logging", level: 70 },
+    { name: "React.js", level: 85 },
+    { name: "Next.js", level: 75 },
+    { name: "JavaScript (ES6+)", level: 88 },
+    { name: "HTML5 / CSS3", level: 92 },
+    { name: "Tailwind CSS", level: 80 },
+    { name: "Material UI", level: 78 },
+    { name: "Framer Motion", level: 70 },
+    { name: "jQuery", level: 65 },
 ];
 
 const TOOLS_SKILLS: Skill[] = [
-    { name: "VS Code / Cursor", level: 95 },
-    { name: "Figma", level: 80 },
-    { name: "Notion / Linear", level: 85 },
-    { name: "Postman / Insomnia", level: 82 },
+    { name: "Shopify / Polaris", level: 80 },
+    { name: "Responsive Design", level: 88 },
+    { name: "UI/UX Interpretation", level: 78 },
+    { name: "Theme Customization", level: 82 },
+    { name: "Performance Optimization", level: 75 },
+];
+
+const DEVTOOLS_SKILLS: Skill[] = [
+    { name: "Git & GitHub", level: 82 },
+    { name: "VS Code / Cursor", level: 90 },
+    { name: "Generative AI / Prompt Engineering", level: 85 },
+    { name: "Netlify / Vercel", level: 75 },
+    { name: "Node.js", level: 65 },
+    { name: "REST APIs", level: 72 },
 ];
 
 function SkillBar({ skill, delay = 0 }: { skill: Skill; delay?: number }) {
@@ -103,25 +97,18 @@ export function SkillsView() {
                 <SkillGrid skills={FRONTEND_SKILLS} />
             </MessageBubble>
 
-            <DateSeparator>Backend</DateSeparator>
+            <DateSeparator>Shopify & Design</DateSeparator>
 
             <MessageBubble>
-                <MessageLabel>Server-Side & Databases</MessageLabel>
-                <SkillGrid skills={BACKEND_SKILLS} />
-            </MessageBubble>
-
-            <DateSeparator>DevOps</DateSeparator>
-
-            <MessageBubble>
-                <MessageLabel>Infrastructure & Deployment</MessageLabel>
-                <SkillGrid skills={DEVOPS_SKILLS} />
-            </MessageBubble>
-
-            <DateSeparator>Tools & Workflow</DateSeparator>
-
-            <MessageBubble>
-                <MessageLabel>Productivity</MessageLabel>
+                <MessageLabel>E-Commerce & UI/UX</MessageLabel>
                 <SkillGrid skills={TOOLS_SKILLS} />
+            </MessageBubble>
+
+            <DateSeparator>Dev Tools & Others</DateSeparator>
+
+            <MessageBubble>
+                <MessageLabel>Tools, AI & Backend</MessageLabel>
+                <SkillGrid skills={DEVTOOLS_SKILLS} />
             </MessageBubble>
         </>
     );
