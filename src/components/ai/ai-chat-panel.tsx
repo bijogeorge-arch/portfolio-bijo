@@ -2,12 +2,27 @@
 
 import React, { useState, useRef, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Send, Bot, X, Sparkles } from "lucide-react";
+import {
+    Send,
+    Bot,
+    X,
+    Sparkles,
+    Code2,
+    Briefcase,
+    GraduationCap,
+    Mail,
+} from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useAnimations } from "@/context/animation-context";
 import { useAIChat } from "@/context/ai-chat-context";
-import { LottieAnimation } from "@/components/lottie/lottie-animation";
-import typingAnimationData from "@/components/lottie/typing-animation.json";
+
+// ── Quick suggestion chips ────────────────────────────────────────────────
+const SUGGESTIONS = [
+    { label: "Skills & Tech", icon: Code2, prompt: "What are Bijo's main technical skills?" },
+    { label: "Experience", icon: Briefcase, prompt: "Tell me about Bijo's work experience" },
+    { label: "Education", icon: GraduationCap, prompt: "What is Bijo's educational background?" },
+    { label: "Contact", icon: Mail, prompt: "How can I contact Bijo?" },
+];
 
 interface AIChatPanelProps {
     isOpen: boolean;
@@ -36,13 +51,14 @@ export function AIChatPanel({ isOpen, onClose }: AIChatPanelProps) {
         }
     }, [isOpen]);
 
-    const sendMessage = async () => {
-        if (!input.trim() || isLoading) return;
+    const sendMessage = async (text?: string) => {
+        const messageText = text || input.trim();
+        if (!messageText || isLoading) return;
 
         const userMessage = {
             id: Date.now().toString(),
             role: "user" as const,
-            content: input.trim(),
+            content: messageText,
         };
 
         addMessage(userMessage);
@@ -66,7 +82,8 @@ export function AIChatPanel({ isOpen, onClose }: AIChatPanelProps) {
                 addMessage({
                     id: Date.now().toString(),
                     role: "assistant",
-                    content: `⚠️ ${data.error}`,
+                    content:
+                        "I'm having trouble connecting right now, but I can still help! Try asking about Bijo's **skills**, **projects**, **experience**, or **contact info** 😊",
                 });
             } else {
                 addMessage({
@@ -80,7 +97,7 @@ export function AIChatPanel({ isOpen, onClose }: AIChatPanelProps) {
                 id: Date.now().toString(),
                 role: "assistant",
                 content:
-                    "⚠️ Network error. Please check your connection and try again.",
+                    "Hmm, looks like there's a network issue. Please check your connection and try again! 🔌",
             });
         } finally {
             setIsLoading(false);
@@ -94,8 +111,8 @@ export function AIChatPanel({ isOpen, onClose }: AIChatPanelProps) {
         }
     };
 
-    const formatTime = () => {
-        return new Date().toLocaleTimeString([], {
+    const formatTime = (date?: Date) => {
+        return (date || new Date()).toLocaleTimeString([], {
             hour: "2-digit",
             minute: "2-digit",
         });
@@ -111,6 +128,9 @@ export function AIChatPanel({ isOpen, onClose }: AIChatPanelProps) {
             },
         }
         : {};
+
+    // Only show suggestions if there are no user messages yet
+    const showSuggestions = messages.filter((m) => m.role === "user").length === 0;
 
     return (
         <AnimatePresence>
@@ -144,8 +164,8 @@ export function AIChatPanel({ isOpen, onClose }: AIChatPanelProps) {
                         "flex flex-col"
                     )}
                 >
-                    {/* Chat Header */}
-                    <div className="flex items-center gap-3 px-4 py-3 bg-primary text-primary-foreground shrink-0">
+                    {/* ── Chat Header ─────────────────────────────────── */}
+                    <div className="flex items-center gap-3 px-4 py-3 bg-gradient-to-r from-blue-500 to-blue-600 dark:from-blue-600 dark:to-blue-700 text-white shrink-0">
                         <div className="flex items-center justify-center w-9 h-9 rounded-full bg-white/20 backdrop-blur-sm">
                             <Bot className="w-5 h-5" />
                         </div>
@@ -155,13 +175,13 @@ export function AIChatPanel({ isOpen, onClose }: AIChatPanelProps) {
                             </h3>
                             <div className="flex items-center gap-1.5">
                                 <span className="w-1.5 h-1.5 rounded-full bg-green-300 animate-pulse" />
-                                <span className="text-[11px] text-primary-foreground/80">
-                                    {isLoading ? "typing..." : "online"}
+                                <span className="text-[11px] text-white/80">
+                                    {isLoading ? "typing…" : "online"}
                                 </span>
                             </div>
                         </div>
                         <div className="flex items-center gap-1">
-                            <Sparkles className="w-4 h-4 text-primary-foreground/60" />
+                            <Sparkles className="w-4 h-4 text-white/60" />
                             <button
                                 onClick={onClose}
                                 className="p-1.5 rounded-full hover:bg-white/20 transition-colors ml-1"
@@ -171,7 +191,7 @@ export function AIChatPanel({ isOpen, onClose }: AIChatPanelProps) {
                         </div>
                     </div>
 
-                    {/* Messages Area */}
+                    {/* ── Messages Area ────────────────────────────────── */}
                     <div
                         className={cn(
                             "flex-1 overflow-y-auto px-3 py-4 space-y-3",
@@ -194,13 +214,14 @@ export function AIChatPanel({ isOpen, onClose }: AIChatPanelProps) {
                                     className={cn(
                                         "max-w-[85%] px-3.5 py-2.5 text-[14px] leading-relaxed relative",
                                         msg.role === "user"
-                                            ? "bg-primary text-primary-foreground rounded-2xl rounded-br-[4px]"
+                                            ? "bg-blue-500 dark:bg-blue-600 text-white rounded-2xl rounded-br-[4px]"
                                             : "bg-card dark:bg-[#212D3B] text-card-foreground rounded-2xl rounded-bl-[4px] shadow-sm border border-border/10 dark:border-none"
                                     )}
                                 >
+                                    {/* Simple markdown-like bold support */}
                                     {msg.content.split("\n").map((line, i) => (
                                         <React.Fragment key={i}>
-                                            {line}
+                                            {renderLine(line)}
                                             {i <
                                                 msg.content.split("\n").length -
                                                 1 && <br />}
@@ -210,7 +231,7 @@ export function AIChatPanel({ isOpen, onClose }: AIChatPanelProps) {
                                         className={cn(
                                             "text-[10px] float-right ml-2 mt-1",
                                             msg.role === "user"
-                                                ? "text-primary-foreground/60"
+                                                ? "text-white/60"
                                                 : "text-muted-foreground/60"
                                         )}
                                     >
@@ -220,7 +241,36 @@ export function AIChatPanel({ isOpen, onClose }: AIChatPanelProps) {
                             </motion.div>
                         ))}
 
-                        {/* Typing Indicator */}
+                        {/* ── Suggestion Chips ─────────────────────────── */}
+                        {showSuggestions && !isLoading && (
+                            <motion.div
+                                {...motionProps}
+                                className="flex flex-wrap gap-2 pt-1"
+                            >
+                                {SUGGESTIONS.map((s) => (
+                                    <button
+                                        key={s.label}
+                                        onClick={() => sendMessage(s.prompt)}
+                                        className={cn(
+                                            "flex items-center gap-1.5 px-3 py-1.5",
+                                            "text-xs font-medium rounded-full",
+                                            "bg-blue-50 dark:bg-blue-900/30",
+                                            "text-blue-600 dark:text-blue-400",
+                                            "border border-blue-200 dark:border-blue-800/50",
+                                            "hover:bg-blue-100 dark:hover:bg-blue-900/50",
+                                            "hover:border-blue-300 dark:hover:border-blue-700",
+                                            "transition-all duration-150 cursor-pointer",
+                                            "active:scale-95"
+                                        )}
+                                    >
+                                        <s.icon className="w-3 h-3" />
+                                        {s.label}
+                                    </button>
+                                ))}
+                            </motion.div>
+                        )}
+
+                        {/* ── Typing Indicator ─────────────────────────── */}
                         {isLoading && (
                             <motion.div
                                 initial={
@@ -236,10 +286,11 @@ export function AIChatPanel({ isOpen, onClose }: AIChatPanelProps) {
                                 className="flex justify-start"
                             >
                                 <div className="bg-card dark:bg-[#212D3B] rounded-2xl rounded-bl-[4px] shadow-sm border border-border/10 dark:border-none px-4 py-3">
-                                    <LottieAnimation
-                                        animationData={typingAnimationData}
-                                        className="w-12 h-5"
-                                    />
+                                    <div className="flex items-center gap-1">
+                                        <span className="w-2 h-2 rounded-full bg-muted-foreground/40 animate-bounce" style={{ animationDelay: "0ms" }} />
+                                        <span className="w-2 h-2 rounded-full bg-muted-foreground/40 animate-bounce" style={{ animationDelay: "150ms" }} />
+                                        <span className="w-2 h-2 rounded-full bg-muted-foreground/40 animate-bounce" style={{ animationDelay: "300ms" }} />
+                                    </div>
                                 </div>
                             </motion.div>
                         )}
@@ -247,7 +298,7 @@ export function AIChatPanel({ isOpen, onClose }: AIChatPanelProps) {
                         <div ref={messagesEndRef} />
                     </div>
 
-                    {/* Input Area */}
+                    {/* ── Input Area ───────────────────────────────────── */}
                     <div className="flex items-center gap-2 px-3 py-3 bg-background border-t border-border/40 shrink-0">
                         <input
                             ref={inputRef}
@@ -255,26 +306,26 @@ export function AIChatPanel({ isOpen, onClose }: AIChatPanelProps) {
                             value={input}
                             onChange={(e) => setInput(e.target.value)}
                             onKeyDown={handleKeyDown}
-                            placeholder="Ask about skills, projects..."
+                            placeholder="Ask about skills, projects…"
                             disabled={isLoading}
                             className={cn(
                                 "flex-1 bg-muted/50 border border-transparent rounded-full",
                                 "px-4 py-2.5 text-sm text-foreground",
                                 "placeholder:text-muted-foreground/60",
-                                "focus:outline-none focus:ring-1 focus:ring-primary/50 focus:bg-background",
+                                "focus:outline-none focus:ring-1 focus:ring-blue-500/50 focus:bg-background",
                                 "transition-all duration-200",
                                 "disabled:opacity-50"
                             )}
                         />
                         <button
-                            onClick={sendMessage}
+                            onClick={() => sendMessage()}
                             disabled={!input.trim() || isLoading}
                             className={cn(
                                 "flex items-center justify-center w-10 h-10 rounded-full",
-                                "bg-primary text-primary-foreground",
-                                "hover:bg-primary/90 active:scale-95",
+                                "bg-blue-500 dark:bg-blue-600 text-white",
+                                "hover:bg-blue-600 dark:hover:bg-blue-500 active:scale-95",
                                 "transition-all duration-150",
-                                "disabled:opacity-40 disabled:hover:bg-primary disabled:active:scale-100"
+                                "disabled:opacity-40 disabled:hover:bg-blue-500 disabled:active:scale-100"
                             )}
                         >
                             <Send className="w-4 h-4" />
@@ -284,4 +335,19 @@ export function AIChatPanel({ isOpen, onClose }: AIChatPanelProps) {
             )}
         </AnimatePresence>
     );
+}
+
+// ── Helper: render **bold** text in messages ──────────────────────────────
+function renderLine(line: string): React.ReactNode {
+    const parts = line.split(/(\*\*[^*]+\*\*)/g);
+    return parts.map((part, i) => {
+        if (part.startsWith("**") && part.endsWith("**")) {
+            return (
+                <strong key={i} className="font-semibold">
+                    {part.slice(2, -2)}
+                </strong>
+            );
+        }
+        return part;
+    });
 }
