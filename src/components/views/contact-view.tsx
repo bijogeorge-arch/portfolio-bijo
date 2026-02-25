@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { Send, Linkedin, Github, Twitter, Mail, CheckCircle2, Sparkles } from "lucide-react";
+import { Send, Loader2, Linkedin, Github, Twitter, Mail, CheckCircle2, AlertCircle, Sparkles } from "lucide-react";
 import { DateSeparator } from "@/components/chat/date-separator";
 import {
     MessageBubble,
@@ -13,7 +13,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { motion, AnimatePresence } from "framer-motion";
-import { DEVELOPER, SOCIAL_LINKS } from "@/lib/site-data";
+import { SOCIAL_LINKS } from "@/lib/site-data";
 
 /** Map icon names from site-data to actual Lucide components */
 const ICON_MAP: Record<string, React.ReactNode> = {
@@ -24,40 +24,53 @@ const ICON_MAP: Record<string, React.ReactNode> = {
 };
 
 export function ContactView() {
-    const [formState, setFormState] = useState<"idle" | "sent">("idle");
+    const [formState, setFormState] = useState<"idle" | "sending" | "sent" | "error">("idle");
+    const [errorMessage, setErrorMessage] = useState("");
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [message, setMessage] = useState("");
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         if (!name.trim() || !email.trim() || !message.trim()) return;
 
-        // ── Mailto fallback ──────────────────────────────────
-        // Constructs a mailto: link and opens it in the user's default email client.
-        const subject = encodeURIComponent(`Portfolio Inquiry from ${name.trim()}`);
-        const body = encodeURIComponent(
-            `From: ${name.trim()} (${email.trim()})\n\n${message.trim()}`
-        );
-        window.location.href = `mailto:${DEVELOPER.email}?subject=${subject}&body=${body}`;
+        setFormState("sending");
+        setErrorMessage("");
 
-        // TODO: Hook up a real backend API (e.g. Resend, SendGrid, or a Next.js
-        // API Route at /api/contact) to send the email server-side instead.
-        // Example:
-        //   const res = await fetch('/api/contact', {
-        //     method: 'POST',
-        //     headers: { 'Content-Type': 'application/json' },
-        //     body: JSON.stringify({ name, email, message }),
-        //   });
+        try {
+            const res = await fetch("/api/contact", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    name: name.trim(),
+                    email: email.trim(),
+                    message: message.trim(),
+                }),
+            });
 
-        // Show success state
-        setFormState("sent");
-        setTimeout(() => {
-            setFormState("idle");
-            setName("");
-            setEmail("");
-            setMessage("");
-        }, 3000);
+            const data = await res.json();
+
+            if (!res.ok) {
+                throw new Error(data.error || "Something went wrong.");
+            }
+
+            // Success  — show confirmation, then reset after 4 seconds
+            setFormState("sent");
+            setTimeout(() => {
+                setFormState("idle");
+                setName("");
+                setEmail("");
+                setMessage("");
+            }, 4000);
+        } catch (err) {
+            console.error("[Contact Form]", err);
+            setErrorMessage(
+                err instanceof Error ? err.message : "Failed to send. Please try again."
+            );
+            setFormState("error");
+            // Auto-dismiss error after 5 seconds
+            setTimeout(() => setFormState("idle"), 5000);
+        }
     };
 
     return (
@@ -100,7 +113,7 @@ export function ContactView() {
                                 value={name}
                                 onChange={(e) => setName(e.target.value)}
                                 className="h-9 text-[13px] bg-muted/40 dark:bg-white/5 border-border/20 dark:border-white/10 rounded-lg focus-visible:ring-primary/30"
-                                disabled={formState !== "idle"}
+                                disabled={formState === "sending"}
                                 required
                             />
                         </div>
@@ -118,7 +131,7 @@ export function ContactView() {
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
                                 className="h-9 text-[13px] bg-muted/40 dark:bg-white/5 border-border/20 dark:border-white/10 rounded-lg focus-visible:ring-primary/30"
-                                disabled={formState !== "idle"}
+                                disabled={formState === "sending"}
                                 required
                             />
                         </div>
@@ -136,7 +149,7 @@ export function ContactView() {
                             value={message}
                             onChange={(e) => setMessage(e.target.value)}
                             className="min-h-[100px] text-[13px] bg-muted/40 dark:bg-white/5 border-border/20 dark:border-white/10 rounded-lg resize-none focus-visible:ring-primary/30"
-                            disabled={formState !== "idle"}
+                            disabled={formState === "sending"}
                             required
                         />
                     </div>
@@ -151,7 +164,18 @@ export function ContactView() {
                                 className="flex items-center gap-2 text-chart-2 text-[13px] font-medium py-1"
                             >
                                 <CheckCircle2 className="w-4 h-4" />
-                                Email client opened — message ready to send!
+                                Message sent successfully! I&apos;ll get back to you soon.
+                            </motion.div>
+                        ) : formState === "error" ? (
+                            <motion.div
+                                key="error"
+                                initial={{ opacity: 0, y: 5 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                exit={{ opacity: 0 }}
+                                className="flex items-center gap-2 text-destructive text-[13px] font-medium py-1"
+                            >
+                                <AlertCircle className="w-4 h-4" />
+                                {errorMessage}
                             </motion.div>
                         ) : (
                             <motion.div key="btn" initial={{ opacity: 1 }} exit={{ opacity: 0 }}>
@@ -159,9 +183,19 @@ export function ContactView() {
                                     type="submit"
                                     size="sm"
                                     className="h-9 rounded-lg text-[13px] font-medium gap-2 w-full sm:w-auto"
+                                    disabled={formState === "sending"}
                                 >
-                                    <Send className="w-3.5 h-3.5" />
-                                    Send Message
+                                    {formState === "sending" ? (
+                                        <>
+                                            <Loader2 className="w-3.5 h-3.5 animate-spin" />
+                                            Sending...
+                                        </>
+                                    ) : (
+                                        <>
+                                            <Send className="w-3.5 h-3.5" />
+                                            Send Message
+                                        </>
+                                    )}
                                 </Button>
                             </motion.div>
                         )}
