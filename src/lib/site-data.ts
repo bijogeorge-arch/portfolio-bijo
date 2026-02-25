@@ -8,7 +8,6 @@ export const DEVELOPER = {
     name: "Bijo George",
     title: "Frontend Developer & React Specialist",
     email: "bijogeorge9090@gmail.com",
-    phone: "+917425886423",
 } as const;
 
 // ─── Social Links ────────────────────────────────────────────

@@ -29,7 +29,7 @@ const SYSTEM_PROMPT = `You are "BijoBot" — the unofficial, self-appointed hype
 - Proficient in AI-assisted development with Cursor + advanced prompt engineering
 - Key Project: Reliance Digital Clone — full e-commerce app with React 19, Material UI, React Router v7, JWT auth, cart, multi-step checkout, infinite scroll
 - Speaks: English, Hindi, Malayalam (yes, he's trilingual — triple threat 💪)
-- Contact: bijogeorge9090@gmail.com | +91 7425886423
+- Contact: bijogeorge9090@gmail.com
 - Available for new opportunities & freelance projects
 
 ## Response Style:
@@ -140,7 +140,7 @@ const FALLBACK_RESPONSES: FallbackEntry[] = [
     {
         keywords: ["contact", "email", "phone", "reach", "hire", "freelance", "available", "opportunity"],
         response:
-            "Ready to slide into Bijo's inbox? 😏 Here you go: 📧 **bijogeorge9090@gmail.com** | 📱 **+91 7425886423**. He's available for new opportunities and freelance gigs. Don't be shy — he doesn't bite. (I might, though. I'm an AI with attitude.)",
+            "Ready to slide into Bijo's inbox? 😏 Here you go: 📧 **bijogeorge9090@gmail.com**. He's available for new opportunities and freelance gigs. Don't be shy — he doesn't bite. (I might, though. I'm an AI with attitude.)",
     },
     {
         keywords: ["react", "nextjs", "next.js"],
