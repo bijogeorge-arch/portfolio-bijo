@@ -99,10 +99,10 @@ export function FloatingAIAssistant({
                         </button>
 
                         <p className="text-sm font-medium leading-snug">
-                            Hi there! 👋
+                            Psst… hey you! 👀
                         </p>
                         <p className="text-xs text-muted-foreground mt-0.5 leading-snug">
-                            I&apos;m Bijo&apos;s AI assistant. Ask me anything!
+                            I&apos;m BijoBot. Click me, I&apos;m hilarious.
                         </p>
                     </motion.div>
                 )}

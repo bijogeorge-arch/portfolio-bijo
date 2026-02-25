@@ -20,10 +20,10 @@ interface AIChatContextType {
 const INITIAL_GREETING: ChatMessage = {
     id: "greeting",
     role: "assistant",
-    content: `Hello! 👋 I'm the personal AI assistant of **Bijo George**.\nI'm here to help you learn about his skills, projects, work experience, education, or how to get in touch.\nFeel free to pick a topic below or type your question!`,
+    content: `Yo! 🤖 I'm **BijoBot** — Bijo George's devastatingly handsome AI sidekick.\nI know all his secrets: skills, projects, work drama, education plot twists, and how to summon him via email. 😏\nGo ahead — pick a topic below or type something wild. I dare you. 🔥`,
 };
 
-const STORAGE_KEY = "ai-chat-history-v3";
+const STORAGE_KEY = "ai-chat-history-v4";
 
 // ── Context ────────────────────────────────────────────────────
 const AIChatContext = createContext<AIChatContextType>({

@@ -83,7 +83,7 @@ export function AIChatPanel({ isOpen, onClose }: AIChatPanelProps) {
                     id: Date.now().toString(),
                     role: "assistant",
                     content:
-                        "I'm having trouble connecting right now, but I can still help! Try asking about Bijo's **skills**, **projects**, **experience**, or **contact info** 😊",
+                        "Oof, my brain just short-circuited for a sec 🤯 But I'm too stubborn to stay down! Try asking about Bijo's **skills**, **projects**, or **experience** — I gotchu! 💪",
                 });
             } else {
                 addMessage({
@@ -97,7 +97,7 @@ export function AIChatPanel({ isOpen, onClose }: AIChatPanelProps) {
                 id: Date.now().toString(),
                 role: "assistant",
                 content:
-                    "Hmm, looks like there's a network issue. Please check your connection and try again! 🔌",
+                    "Yikes, the Wi-Fi gods are angry today! 🔌 Check your connection and try again — I'll be right here, looking fabulous and waiting. 💅",
             });
         } finally {
             setIsLoading(false);
@@ -171,12 +171,12 @@ export function AIChatPanel({ isOpen, onClose }: AIChatPanelProps) {
                         </div>
                         <div className="flex-1 min-w-0">
                             <h3 className="font-semibold text-sm leading-tight">
-                                AI Assistant
+                                BijoBot 🤖
                             </h3>
                             <div className="flex items-center gap-1.5">
                                 <span className="w-1.5 h-1.5 rounded-full bg-green-300 animate-pulse" />
                                 <span className="text-[11px] text-white/80">
-                                    {isLoading ? "typing…" : "online"}
+                                    {isLoading ? "cooking up something spicy…" : "online & unhinged"}
                                 </span>
                             </div>
                         </div>
@@ -306,7 +306,7 @@ export function AIChatPanel({ isOpen, onClose }: AIChatPanelProps) {
                             value={input}
                             onChange={(e) => setInput(e.target.value)}
                             onKeyDown={handleKeyDown}
-                            placeholder="Ask about skills, projects…"
+                            placeholder="Try me… ask anything about Bijo 😏"
                             disabled={isLoading}
                             className={cn(
                                 "flex-1 bg-muted/50 border border-transparent rounded-full",
