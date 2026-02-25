@@ -13,7 +13,7 @@ export const PORTFOLIO_TABS = [
     { id: "experience", title: "Experience", icon: <Briefcase className="w-6 h-6" />, text: "Worked at Tech Corp with 5+ yrs...", time: "09:45", statusIcon: "experience-rocket" as AnimatedIconType },
     { id: "projects", title: "Projects", icon: <Code className="w-6 h-6" />, text: "Built Telegram-style portfolio site...", time: "Yesterday", statusIcon: "projects-tools" as AnimatedIconType, badgeCount: 4 },
     { id: "skills", title: "Skills", icon: <Terminal className="w-6 h-6" />, text: "React, Next.js, TailwindCSS, Node...", time: "Yesterday", statusIcon: "skills-zap" as AnimatedIconType, badgeCount: 11 },
-    { id: "education", title: "Education", icon: <GraduationCap className="w-6 h-6" />, text: "BSc in Computer Science...", time: "Tue", statusIcon: "education-cap" as AnimatedIconType },
+    { id: "education", title: "Education", icon: <GraduationCap className="w-6 h-6" />, text: "MCA (Pursuing) & BCA...", time: "Tue", statusIcon: "education-cap" as AnimatedIconType },
     { id: "languages", title: "Languages", icon: <Globe className="w-6 h-6" />, text: "English (Native), Spanish (Basic)...", time: "Mon", statusIcon: "languages-globe" as AnimatedIconType },
     { id: "contact", title: "Contact", icon: <Mail className="w-6 h-6" />, text: "Available for new opportunities...", time: "Mon", statusIcon: "contact-mail" as AnimatedIconType },
     { id: "settings", title: "Settings", icon: <Settings className="w-6 h-6" />, text: "Theme, Preferences...", time: "Oct 25", statusIcon: "settings-gear" as AnimatedIconType },
@@ -51,7 +51,6 @@ export function Sidebar({ activeTab, onTabChange, className, searchInputRef }: S
                 <div className="flex items-center gap-3">
                     <div className="relative shrink-0">
                         <Avatar className="w-10 h-10 ring-2 ring-primary/20">
-                            <AvatarImage src="/avatar.png" alt="Bijo George" />
                             <AvatarFallback className="bg-primary/10 text-primary font-bold text-sm">BG</AvatarFallback>
                         </Avatar>
                         {/* Online status dot */}

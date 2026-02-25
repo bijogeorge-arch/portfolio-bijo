@@ -64,25 +64,17 @@ export const FEATURED_PROJECTS: ProjectData[] = [
         image: "/projects/reliance-digital.png",
         badges: ["React 19", "Material UI", "React Router v7", "Styled Components", "JWT", "REST API"],
         githubUrl: "https://github.com/bijogeorge-arch/reliance-digital-clone",
+        liveUrl: "https://reliance-clonee.netlify.app/",
     },
     {
         label: "Portfolio",
         title: "Telegram-Style Portfolio",
         description:
             "This very portfolio you're viewing! A developer portfolio reimagined as a desktop messaging app with AI assistant integration, Framer Motion animations, Resend email integration, and full theme support.",
-        image: "/projects/portfolio.png",
+        image: "/projects/personal-portfolio.png",
         badges: ["Next.js", "TypeScript", "Tailwind CSS", "shadcn/ui", "Framer Motion", "Resend"],
         githubUrl: "https://github.com/bijogeorge-arch/portfolio-bijo",
     },
 ];
 
-export const OTHER_PROJECTS: ProjectData[] = [
-    {
-        title: "Shopify Theme Customizations",
-        description:
-            "Built Shopify-based interfaces aligned with the Shopify Polaris Design System. Improved theme usability, visual consistency, and frontend performance through theme inspection and optimization.",
-        gradient:
-            "bg-gradient-to-br from-chart-5/30 via-primary/20 to-chart-2/20 dark:from-chart-5/20 dark:via-primary/15 dark:to-chart-2/15",
-        badges: ["Shopify", "Polaris", "Liquid", "JavaScript", "Theme Dev"],
-    },
-];
+export const OTHER_PROJECTS: ProjectData[] = [];

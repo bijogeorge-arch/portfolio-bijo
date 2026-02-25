@@ -26,7 +26,6 @@ export function ProfileView() {
                     {/* Profile Avatar */}
                     <div className="shrink-0">
                         <Avatar className="w-16 h-16 ring-2 ring-primary/20 shadow-md">
-                            <AvatarImage src="/avatar.png" alt="Bijo George" />
                             <AvatarFallback className="bg-primary/10 text-primary font-bold text-lg">BG</AvatarFallback>
                         </Avatar>
                     </div>
